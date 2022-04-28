@@ -1,21 +1,17 @@
-import express from 'express';
-import cors from 'cors';
-import morgan from 'morgan';
-import { router } from './routes/users.js';
-import { port } from '../config/config.js';
-import { connectToDB, getDb } from './db/connection.js';
+import http from 'http';
+import { Server } from 'socket.io';
+import { connectToDB } from './db/connection.js';
+import 'dotenv/config';
+import { Socket } from './sockets/socketController.js';
+import { app } from './app.js';
 
-const app = express();
+const server = http.createServer(app);
+const io = new Server(server);
+const socket = new Socket(io);
 
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+socket.socketEvents(socket);
 
-app.use(cors())
-app.use(morgan("dev"))
-
-app.listen(port, () => {
-    console.log("Server started on port 8080");
-    connectToDB()
-})
-
-app.use("/user", router)
+server.listen(process.env.API_PORT, async () => {
+    await connectToDB();
+    console.log('Server started on port 8080');
+});
