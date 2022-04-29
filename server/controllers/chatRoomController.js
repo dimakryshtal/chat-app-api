@@ -21,6 +21,7 @@ export const chatRoomContoller = {
     findChat: async (req, res) => {
         const db = getDb();
         const { id } = req.params;
+        console.log(id);
 
         try {
             const chat = await db.collection('chatRooms').findOne({ chatRoom_id: Number(id) });
