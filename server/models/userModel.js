@@ -1,9 +1,9 @@
-export const createNewUser = (id, firstName, lastName, email, password, username, userChats) => ({
-    user_id: id,
+export const createNewUser = (firstName, lastName, email, password, username, userChats, userFriends) => ({
     firstName,
     lastName,
     username,
     email,
     password,
     userChats,
+    userFriends,
 });

@@ -12,6 +12,7 @@ module.exports = {
         sourceType: 'module',
     },
     rules: {
+        'no-underscore-dangle': 'off',
         'import/prefer-default-export': 0,
         indent: ['error', 4],
         camelcase: 'off',

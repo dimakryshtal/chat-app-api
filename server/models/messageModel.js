@@ -1,7 +1,7 @@
-export const createMessage = (message_id, user_id, chat_id, message) => ({
-    message_id,
+export const createMessage = (user_id, chat_id, message, date) => ({
     user_id,
     chat_id,
     message,
+    date,
     readby: [],
 });

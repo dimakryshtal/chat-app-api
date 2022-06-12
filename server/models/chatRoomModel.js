@@ -1,5 +1,4 @@
-export const createChatRoom = (chatRoom_id, chatType, user_ids) => ({
-    chatRoom_id,
+export const createChatRoom = (chatType, user_ids) => ({
     chatType,
     user_ids,
 });

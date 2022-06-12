@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb';
 import { getDb } from '../db/connection.js';
 import { getNextSequenceValue } from '../db/getNextId.js';
 import { createChatRoom } from '../models/chatRoomModel.js';
@@ -21,7 +22,6 @@ export const chatRoomContoller = {
     findChat: async (req, res) => {
         const db = getDb();
         const { id } = req.params;
-        console.log(id);
 
         try {
             const chat = await db.collection('chatRooms').findOne({ chatRoom_id: Number(id) });
@@ -33,9 +33,10 @@ export const chatRoomContoller = {
 
     loadAllUsersChats: async (req, res) => {
         const db = getDb();
-        const chatIDs = req.query.id.split(',').map((x) => parseInt(x, 10));
+
+        const chatIDs = req.query.id.split(',').map((x) => new ObjectId(x));
         try {
-            const chats = await db.collection('chatRooms').find({ chatRoom_id: { $in: chatIDs } }).toArray();
+            const chats = await db.collection('chatRooms').find({ _id: { $in: chatIDs } }).toArray();
             res.status(200).json({ chats, message: 'All chats have been fetched successfully' });
         } catch (err) {
             res.json({ result: 'Error', message: err });

@@ -5,7 +5,7 @@ info:
 servers:
   - url: http://localhost:8080
 paths:
-  /loadchat/{id}:
+  /loadchat/{ id }:
     get:
       tags:
         - ChatRoom

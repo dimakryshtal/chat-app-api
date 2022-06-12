@@ -8,13 +8,13 @@ export const messageController = {
 
         try {
             const messages = await messagesCollection
-                .find({ chat_id: Number(chatid) })
+                .find({ chat_id: chatid })
                 .sort({ $natural: 1 })
                 .limit(1000)
                 .toArray();
-
             res.json({ messages, message: 'Messages have been fetcehd successfully' });
         } catch (err) {
+            console.log(err);
             res.status(404).json({ result: 'Error', message: err });
         }
     },
